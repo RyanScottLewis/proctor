@@ -1,24 +1,3 @@
-# Proctor
-
-__proc·tor__ _/ˈpräktər/_ _noun_: a person appointed to keep watch over students at examinations.
-
-Proctor is a web front-end for RSpec and MiniTest.
-
-## Clients (Developers)
-
-Developers only need RSpec/MiniTest and a Proctor Formatter configured to talk to the server..
-
-* [proctor-rspec](http://github.com/c00lryguy/proctor-rspec)
-* [proctor-minitest](http://github.com/c00lryguy/proctor-minitest)
-
-## Server
-
-The server is a Rails application, so deploy as you would a normal Rails app.
-
-I suggest Nginx + Unicorn
-
-# License
-
 Copyright (c) 2012 Ryan Scott Lewis (ryanscottlewis@gmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining

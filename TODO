@@ -1,3 +1,9 @@
+**RubyGems**
+
+**CI support**
+
+**Test::Unit support**
+
 **Client side config (server.host, server.port)**
 
 **Move following to model constructors OR metaprogram into the class?**
