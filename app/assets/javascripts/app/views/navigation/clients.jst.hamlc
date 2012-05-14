@@ -1,0 +1,4 @@
+%ul.nav.nav-list
+  - for client in @clients
+    %li
+      %a(href="#/clients/#{client.id}")= client.name

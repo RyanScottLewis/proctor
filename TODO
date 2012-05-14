@@ -1,0 +1,35 @@
+**Client side config (server.host, server.port)**
+
+**Move following to model constructors OR metaprogram into the class?**
+
+This was attempted and failed. I do not understand prototype based languages as well as I thought I did.
+
+**Check out the differences in the following setups and benchmark them:**
+
+1.  Each resource has 3 channels each: `create`, `update`, and `destroy`.  
+    This is the current setup.
+    
+    When a resource is created, it's new attributes are sent to the `create` channel.  
+    When a resource is updated, it's new attributes are sent to the `update` channel.  
+    When a resource is deleted, it's id is sent to the `destroy` channel. 
+    
+2.  Each resource has 1 channel each.  
+    All messages are wrapped in the following data structure:  
+    `{ action: 'create', data: { name: 'new name' } }`
+    
+    The `action` must be one of the following: `create`, `update`, or `destroy`.
+    
+    When a resource is created, the `data` will be it's new attributes and the message will be sent to the `create` channel.  
+    When a resource is updated, the `data` will be it's new attributes and the message will be sent to the `update` channel.  
+    When a resource is updated, the `data` will be it's id and the message will be sent to the `update` channel.
+
+3.  Each resource well send to the same channel: `resources`  
+    All messages are wrapped in the following data structure:  
+    `{ resource: 'User', action: 'create', data: { name: 'new name' } }`
+    
+    The `resource` must be a valid resource class name.  
+    The `action` must be one of the following: `create`, `update`, or `destroy`.
+    
+    When a resource is created, the `data` will be it's new attributes and the message will be sent to the `create` channel.  
+    When a resource is updated, the `data` will be it's new attributes and the message will be sent to the `update` channel.  
+    When a resource is updated, the `data` will be it's id and the message will be sent to the `update` channel.

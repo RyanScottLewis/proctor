@@ -1,0 +1,9 @@
+%ul.nav.nav-list
+  %li
+    %a.settings(href="#/clients/#{@params.client_id}/projects/#{@params.project_id}/iterations/settings")
+      %i.icon-cog
+  - for iteration, index in @iterations
+    %li(class="iteration #{iteration.state} #{if @params.iteration_id? && @params.iteration_id == index.toString() then 'active' else ''}")
+      %a(href="#/clients/#{@params.client_id}/projects/#{@params.project_id}/iterations/#{index}")
+        %span &nbsp;
+        = iteration.created_at

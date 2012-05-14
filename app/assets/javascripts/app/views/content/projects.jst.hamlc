@@ -1,0 +1,24 @@
+- for i in [0...@projects.length] when i % 2 == 0
+  .row-fluid
+    - for project, j in @projects[i...i+2]
+      .span6
+        %a.project(href="#/clients/#{@params.client_id}/projects/#{i+j}")
+          %h3= project.name
+          - if project.iterations().last()? && project.iterations().all().length > 0
+            - last_iteration = project.iterations().last()
+            .row-fluid
+              %h5 #{project.finished_iterations().length} out of #{project.iterations().all().length} iterations finished
+              %hr
+              %h4 Last Iteration
+              .clear
+              %h6 #{last_iteration.finished_examples().length} of #{last_iteration.example_count} finished
+            .row-fluid.status-counts
+              .span4.passing
+                = last_iteration.passing_examples().length
+                %h6 Passing
+              .span4.pending
+                = last_iteration.pending_examples().length
+                %h6 Pending
+              .span4.failing
+                = last_iteration.failing_examples().length
+                %h6 Failing

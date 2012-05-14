@@ -1,0 +1,18 @@
+%ul.breadcrumb
+  %li(class="#{if !@params.client_id? then 'active' else ''}")
+    %a(href="#/clients") Clients
+    - if @params.client_id?
+      %span.divider »
+  - if @params.client_id?
+    %li(class="#{if @params.client_id? && !@params.project_id && !@params.iteration_id then 'active' else ''}")
+      %a(href="#/clients/#{@client.id}")= @client.name
+      - if @params.project_id?
+        %span.divider »
+  - if @params.project_id?
+    %li(class="#{if @params.client_id? && @params.project_id && !@params.iteration_id then 'active' else ''}")
+      %a(href="#/clients/#{@params.client_id}/projects/#{@params.project_id}")= @project.name
+      - if @params.iteration_id?
+        %span.divider »
+  - if @params.iteration_id?
+    %li(class="#{if @params.client_id? && @params.project_id && @params.iteration_id then 'active' else ''}")
+      %a(href="#/clients/#{@params.client_id}/projects/#{@params.project_id}/iterations/#{@params.iteration_id}")= @iteration.created_at

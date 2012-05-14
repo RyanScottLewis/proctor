@@ -1,0 +1,21 @@
+- for i in [0...@iterations.length] when i % 2 == 0
+  .row-fluid
+    - for iteration, j in @iterations[i...i+2]
+      .span6
+        %a.iteration(href="#/clients/#{@params.client_id}/projects/#{@params.project_id}/iterations/#{i+j}")
+          .row-fluid
+            %h3= iteration.created_at
+            %h6 #{iteration.finished_examples().length} of #{iteration.example_count} examples finished
+            - console.log iteration.isFinished()
+            .progress(class="#{ if iteration.isFinished() then '' else 'progress-striped active' }")
+              .bar(style="width: #{(iteration.finished_examples().length/iteration.example_count)*100}%;" (class="#{iteration.state}")
+          .row-fluid.status-counts
+            .span4.passing
+              = iteration.passing_examples().length
+              %h6 Passing
+            .span4.pending
+              = iteration.pending_examples().length
+              %h6 Pending
+            .span4.failing
+              = iteration.failing_examples().length
+              %h6 Failing

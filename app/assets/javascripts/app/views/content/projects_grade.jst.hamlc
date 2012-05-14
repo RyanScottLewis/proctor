@@ -1,0 +1,30 @@
+- for i in [0...@projects.length] when i % 2 == 0
+  .row-fluid
+    - for project in @projects[i...i+2]
+      .span6
+        %a.project(href="#/clients/#{project.client().id}/projects/#{project.id}")
+          .row-fluid
+            %h3= project.name
+            - if project.iterations().last()? && project.iterations().all().length > 0
+              - last_iteration = project.iterations().last()
+            .grade.overall
+              %span.header Overall Grade
+              %span.result(class="project.grade().judgement()")= project.grade().letter()
+            %h5 #{project.finished_iterations().length} out of #{project.iterations().length} iterations finished
+            %hr
+            %h4 Last Iteration
+            .grade
+              %span.header Grade
+              %span.result(class="last_iteration.grade().judgement()")= last_iteration.grade().letter()
+            .clear
+            %h6 #{last_iteration.finished_examples().length} of #{last_iteration.examples().length} finished
+          .row-fluid.status-counts
+            .span4.passing
+              = last_iteration.passing_examples().length
+              %h6 Passing
+            .span4.pending
+              = last_iteration.pending_examples().length
+              %h6 Pending
+            .span4.failing
+              = last_iteration.failing_examples().length
+              %h6 Failing

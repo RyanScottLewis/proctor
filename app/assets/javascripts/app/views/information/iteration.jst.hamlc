@@ -1,0 +1,14 @@
+.iteration
+  %h6 25 of 50 examples finished
+  .progress.progress-striped.active
+    .bar.passing
+  .row-fluid.status-counts
+    .span4.passing
+      25
+      %h6 Passing
+    .span4.pending
+      0
+      %h6 Pending
+    .span4.failing
+      0
+      %h6 Failing

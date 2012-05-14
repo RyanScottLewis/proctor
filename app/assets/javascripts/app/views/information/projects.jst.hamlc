@@ -1,0 +1,5 @@
+.projects
+  .grade.overall
+    %span.header Overall Grade of All Projects
+    %span.result.great A
+  .clear

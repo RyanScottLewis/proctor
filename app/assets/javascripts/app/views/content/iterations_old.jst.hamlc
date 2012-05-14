@@ -1,0 +1,54 @@
+.iterations
+  .row-fluid
+    .span6
+      %a.iteration(href="#/clients/#{@client_id}/projects/#{@project_id}/iterations/0")
+        .row-fluid
+          %h3 2012/04/21 10:10:50 PM EST
+          %h6 25 of 50 examples finished
+          .progress.progress-striped.active
+            .bar.passing
+        .row-fluid.status-counts
+          .span4.passing
+            25
+            %h6 Passing
+          .span4.pending
+            0
+            %h6 Pending
+          .span4.failing
+            0
+            %h6 Failing
+    .span6
+      %a.iteration(href="#/clients/#{@client_id}/projects/#{@project_id}/iterations/1")
+        .row-fluid
+          %h3 2012/04/21 09:50:23 PM EST
+          %h6 5 of 5 examples finished
+          .progress.progress-striped
+            .bar.failing(style="width: 100%;")
+        .row-fluid.status-counts
+          .span4.passing
+            1
+            %h6 Passing
+          .span4.pending
+            1
+            %h6 Pending
+          .span4.failing
+            3
+            %h6 Failing
+  .row-fluid
+    .span6
+      %a.iteration(href="#/clients/#{@client_id}/projects/#{@project_id}/iterations/2")
+        .row-fluid
+          %h3 2012/04/21 09:50:23 PM EST
+          %h6 50 of 50 examples finished
+          .progress.progress-striped
+            .bar.pending(style="width: 100%;")
+        .row-fluid.status-counts
+          .span4.passing
+            30
+            %h6 Passing
+          .span4.pending
+            20
+            %h6 Pending
+          .span4.failing
+            0
+            %h6 Failing

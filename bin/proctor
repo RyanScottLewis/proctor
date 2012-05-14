@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# RAILS_ENV='production'
+
+# require File.expand_path('../../config/application', __FILE__)
+require File.expand_path('../../lib/proctor/web_socket_server', __FILE__)
+
+# Proctor::Application.initialize!
+
+Proctor::WebSocketServer.initialize!

@@ -1,0 +1,303 @@
+/*
+ *= require jqtree
+ *= require_self
+*/
+
+@import "twitter/bootstrap/bootstrap";
+
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+@fontAwesomeEotPath: asset-path('fontawesome-webfont.eot');
+@fontAwesomeWoffPath: asset-path('fontawesome-webfont.woff');
+@fontAwesomeTtfPath: asset-path('fontawesome-webfont.ttf');
+@fontAwesomeSvgzPath: asset-path('fontawesome-webfont.svgz');
+@fontAwesomeSvgPath: asset-path('fontawesome-webfont.svg');
+@import "fontawesome";
+@font-face { font-family: "Give You Glory"; src: url('/fonts/GiveYouGlory.ttf'); } 
+
+@proctorColorsUnknown: #AAAAAA;
+@proctorColorsPassing: #468847;
+@proctorColorsPending: #FFD300;
+@proctorColorsFailing: #B94A48;
+@proctorColorsSelected: rgba(0, 0, 0, 0.07);
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- MIXINS */
+
+.border-radius-custom (@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
+  -webkit-border-radius: @topleft @topright @bottomright @bottomleft;
+  -moz-border-radius: @topleft @topright @bottomright @bottomleft;
+  border-radius: @topleft @topright @bottomright @bottomleft;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- MEDIA */
+
+@media (max-width: 768px) {
+  body {
+    .span4.passing, .span4.pending, .span4.failing {
+      width: 31.491712705%;
+      margin-left: 2.762430939%;
+      float: left;
+    }
+    
+    #content {
+      & > .clients .span6,
+      & > .projects .span6,
+      & > .iterations .span6 {
+        width: 48.93617020799999%;
+        margin-left: 2.127659574%;
+        float: left;
+        
+        &:first-child { margin-left: 0; }
+      }
+    }
+    
+  }
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- CLASSES */
+
+.rounded-box {
+  margin-bottom: 10px;
+  padding: 10px;
+  display: block;
+  
+  background-color: whiteSmoke;
+  border: 1px solid #EEE;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  
+  .border-radius(4px);
+}
+
+.shallow-well {
+  .rounded-box;
+  .box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.2) );
+}
+
+.has-status-counts {
+  .status-counts {
+    .passing, .pending, .failing {
+      font-size: 11px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      margin-bottom: 10px;
+      
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      .border-radius(3px);
+      
+      h6 { 
+        color: white;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+      
+      &:last-child { margin-bottom: 0; }
+    }
+    
+    .passing { background-color: @proctorColorsPassing; }
+    .pending { background-color: @proctorColorsPending; }
+    .failing { background-color: @proctorColorsFailing; }
+  }
+}
+
+.has-grade {
+  .grade {
+    .result {
+      &.horrible { color: @proctorColorsFailing; }
+      &.failing { color: @proctorColorsFailing; }
+      &.bad { color: @proctorColorsPending; }
+      &.alright { color: @proctorColorsPending; }
+      &.good { color: @proctorColorsPassing; }
+      &.great { color: @proctorColorsPassing; }
+    }
+    
+    .header {}
+    
+    font-size: 1.3em;
+    line-height: 30px;
+    
+    &.overall {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+  }
+}
+
+.has-progress-bar {
+  .progress {
+    
+    margin-bottom: 5px;
+    
+    &:not(.active) {
+      .bar { background-image: none; }
+    }
+    .bar { width: 50%; }
+    
+    .bar.passing { background-color: @proctorColorsPassing; }
+    .bar.pending { background-color: @proctorColorsPending; }
+    .bar.failing { background-color: @proctorColorsFailing; }
+  }
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- STYLES */
+
+body {
+  padding: @gridGutterWidth 0 0 0;
+  
+  .clear { clear: both; }
+  
+  .stack > *:not(.active) { display: none }
+  
+  #logo {
+    font-family: 'Give You Glory', cursive;
+    font-size: 7em;
+    line-height: 75px;
+    padding-top: 5px;
+    text-align: center;
+  }
+  
+  #breadcrumbs {
+    .breadcrumb { margin: 0; }
+  }
+  
+  #navigation {
+    .shallow-well;
+    
+    padding: 5px 0;
+    .border-radius-custom(0, 0, 5px, 5px);
+    position: relative;
+    top: -2px;
+    
+    li {
+      a:hover { background-color: rgba(220, 220, 220, 0.3); }
+      &.active a:hover { background-color: #08C; }
+    }
+    
+    .iteration {
+      &.unknown span { background-color: @proctorColorsUnknown; }
+      &.passing span { background-color: @proctorColorsPassing; }
+      &.pending span { background-color: @proctorColorsPending; }
+      &.failing span { background-color: @proctorColorsFailing; }
+    }
+    
+    .iterations {
+      .settings {
+        .btn;
+        .pull-right;
+        
+        margin-right: -8px;
+      }
+    }
+    
+  } /* #navigation */
+  
+  #information {
+    .clients, .projects, .iterations {
+      .has-grade;
+      .grade { .pull-right; }
+    }
+    
+    .iteration {
+      .has-status-counts;
+      .has-progress-bar;
+      
+      .progress { margin-bottom: 10px; }
+    } /* .iterations */
+    
+  } /* #information */
+  
+  
+  #content {
+    /***** .clients *******************************************************************/
+    & > .clients {
+      .client {
+        .rounded-box;
+        .has-grade;
+        .has-status-counts;
+        
+        text-decoration: none;
+        color: black;
+        
+        &:hover { .box-shadow(0 2px 5px black); }
+        &:active { .shallow-well(); }
+        
+        .name {
+          font-size: 1.6em;
+          font-weight: bold;
+        }
+        
+        hr { margin: 5px 0; }
+        .status-counts > .span4 { margin-bottom: 0; }
+      }
+    }
+    /***** .clients *******************************************************************/
+    
+    /***** .projects *******************************************************************/
+    & > .projects {
+      .project {
+        .rounded-box;
+        .has-grade;
+        .has-status-counts;
+        
+        text-decoration: none;
+        color: black;
+        
+        &:hover { .box-shadow(0 2px 5px black); }
+        &:active { .shallow-well(); }
+        
+        .name {
+          font-size: 1.6em;
+          font-weight: bold;
+        }
+        
+        hr { margin: 5px 0; }
+        .status-counts > .span4 { margin-bottom: 0; }
+      }
+    }
+    /***** .projects *******************************************************************/
+    
+    /***** .iterations *******************************************************************/
+    & > .iterations {
+      .iteration {
+        .rounded-box;
+        .has-grade;
+        .has-status-counts;
+        .has-progress-bar;
+        
+        text-decoration: none;
+        color: black;
+        
+        &:hover { .box-shadow(0 2px 5px black); }
+        &:active { .shallow-well(); }
+        
+        .name {
+          font-size: 1.6em;
+          font-weight: bold;
+        }
+        
+        hr { margin: 5px 0; }
+        .status-counts > .span4 { margin-bottom: 0; }
+      }
+    }
+    /***** .iterations *******************************************************************/
+    
+    /***** .iteration *******************************************************************/
+    & > .iteration {
+      .test-output {
+        .shallow-well;
+        
+        li {
+          & > div { padding-left: 5px; }
+          &.folder { background-color: transparent; }
+          &.selected {
+            & > div { background: @proctorColorsSelected; }
+            & > div:hover { background: @proctorColorsSelected; }
+          }
+        }
+      }
+    }
+    /***** .iterations *******************************************************************/
+    
+  } /***** #content *******************************************************************/
+  
+} /***** body *******************************************************************/

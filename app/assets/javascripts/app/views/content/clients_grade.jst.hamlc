@@ -1,0 +1,28 @@
+- for i in [0...@clients.length] when i % 2 == 0
+  .row-fluid
+    - for client in @clients[i...i+2]
+      .span6
+        %a.client(href="#/clients/#{client.id}")
+          %h3= client.name
+          - if client.projects().last()? && client.projects().last().iterations().all().length > 0
+            - last_iteration = client.projects().last().iterations().last()
+            .row-fluid
+              %h3= client.name
+              .grade.overall
+                %span.header Overall Grade
+                %span.result(class="client.grade().judgement()")= client.grade().letter()
+              %h5 #{client.failing_projects().count()} out of #{client.projects().count()} projects failing
+              %hr
+              %h4 Last Iteration (#{client.projects().last().name})
+              .clear
+              %h6 #{last_iteration.finished_examples().length} of #{last_iteration.examples().length} finished
+            .row-fluid.status-counts
+              .span4.passing
+                = last_iteration.passing_examples().length
+                %h6 Passing
+              .span4.pending
+                = last_iteration.pending_examples().length
+                %h6 Pending
+              .span4.failing
+                = last_iteration.failing_examples().length
+                %h6 Failing
